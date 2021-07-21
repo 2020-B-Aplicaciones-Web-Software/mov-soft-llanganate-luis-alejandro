@@ -20,6 +20,7 @@ class ACicloVida : AppCompatActivity() {
             R.id.btn_ciclo_vida
         )
 
+        actualizarNumeroEnPantalla()
         botonACicloVida.setOnClickListener{
             aumentarNumero()
             actualizarNumeroEnPantalla()
@@ -33,7 +34,7 @@ class ACicloVida : AppCompatActivity() {
             putInt("numeroGuardado", numero)
         }
         super.onSaveInstanceState(outState)
-        Log.i("ciclo-vida", "onSaveInstance")
+        Log.i("ciclo-vida", "onSaveInstanceState")
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -41,7 +42,7 @@ class ACicloVida : AppCompatActivity() {
         val numeroRecuperado: Int? = savedInstanceState.getInt("numeroGuardado")
         if(numeroRecuperado != null){
             Log.i("ciclo-vida", "Llego numero ${numeroRecuperado}")
-            // this.numero = numero
+            // this.numero = numeo
             numero = numeroRecuperado
             actualizarNumeroEnPantalla()
         }
