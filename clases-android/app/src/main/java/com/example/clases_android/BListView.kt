@@ -2,31 +2,33 @@ package com.example.clases_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
+import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 
 class BListView : AppCompatActivity() {
+
+    var posicionItemSeleccionado = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blist_view)
 
-        val arregloNumeros = arrayListOf<Int>(1,2,3,4)
+        val arreglo = BBaseDatosMemoria.arregloBUsuario
         val listViewEjemplo = findViewById<ListView>(R.id.txv_ejemplo)
 
         val adapter =  ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1, // Layout (Visual)
-            arregloNumeros,
+            arreglo,
         )
 
         listViewEjemplo.adapter = adapter
         val botonAnadirItem = findViewById<Button>(R.id.btn_list_view_anadir)
         botonAnadirItem.setOnClickListener {
-            anadirItems(1, arregloNumeros, adapter)
+            anadirItems(BUsuario("Anonimo", "a@g.con"), arreglo, adapter)
         }
 
 //        listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->
@@ -48,11 +50,38 @@ class BListView : AppCompatActivity() {
         super.onCreateContextMenu(menu, v, menuInfo)
         val inflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
+
+        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        val id = info.position
+        posicionItemSeleccionado = id
+        Log.i("list-view", "List view ${posicionItemSeleccionado}")
+        Log.i("list-view", "List view ${BBaseDatosMemoria.arregloBUsuario[id]}")
     }
 
-    fun anadirItems(newItem: Int, array: ArrayList<Int>, adapter: ArrayAdapter<Int>){
+    fun anadirItems(newItem: BUsuario, array: ArrayList<BUsuario>, adapter: ArrayAdapter<*>){
         array.add(newItem);
         adapter.notifyDataSetChanged();
     }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when(item?.itemId){
+            // Editar
+            R.id.mi_editar -> {
+                Log.i("list-view", "Editar ${
+                    BBaseDatosMemoria.arregloBUsuario[
+                        posicionItemSeleccionado
+                ]}")
+                return true
+            }
+            // Eliminar
+            R.id.mi_eliminar -> {
+                Log.i("list-view", "Eliminar ${
+                    BBaseDatosMemoria.arregloBUsuario[
+                        posicionItemSeleccionado
+                ]}")
+                return true
+            }
+            else -> super.onContextItemSelected(item)
+        }
+    }
 }

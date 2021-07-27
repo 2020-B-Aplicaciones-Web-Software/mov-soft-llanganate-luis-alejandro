@@ -8,4 +8,7 @@
     <item
         android:id="@+id/mi_eliminar"
         android:title="Eliminar" />
+    <item
+        android:id="@+id/mi_ver_rutina"
+        android:title="Visualizar rutina" />
 </menu>
