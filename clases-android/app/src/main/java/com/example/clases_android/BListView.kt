@@ -7,6 +7,7 @@ import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 
 class BListView : AppCompatActivity() {
 
@@ -28,18 +29,51 @@ class BListView : AppCompatActivity() {
         listViewEjemplo.adapter = adapter
         val botonAnadirItem = findViewById<Button>(R.id.btn_list_view_anadir)
         botonAnadirItem.setOnClickListener {
-            anadirItems(BUsuario("Anonimo", "a@g.con"), arreglo, adapter)
+            anadirItems(BUsuario("Anonimo", "a@g.con", null), arreglo, adapter)
         }
 
-//        listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->
-//            Toast.makeText(
-//                this,
-//                adapterView.getItemAtPosition(position).toString(),
-//                Toast.LENGTH_LONG
-//            ).show()
-//        }
+        listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->
+            Toast.makeText(
+                this,
+                adapterView.getItemAtPosition(position).toString(),
+                Toast.LENGTH_LONG
+            ).show()
 
-        registerForContextMenu(listViewEjemplo)
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Titulo")
+           // builder.setMessage("Mensaje")
+
+            val seleccionUsuario = booleanArrayOf(
+                true,
+                false,
+                false
+            )
+            val opciones = resources.getStringArray(R.array.string_array_opciones_dialogo)
+
+            builder.setMultiChoiceItems(
+                opciones,
+                seleccionUsuario,
+                { dialog, which, isChecked ->
+                    Log.i("list-view", "${which} - ${isChecked}")
+
+                }
+            )
+
+            builder.setPositiveButton(
+                "Si",
+                { dialog, which ->
+                    Log.i("list-view", "Si")
+                }
+            )
+            builder.setNegativeButton(
+                "No",
+                null
+            )
+            val dialogo = builder.create()
+            dialogo.show()
+        }
+
+      //  registerForContextMenu(listViewEjemplo)
     }
 
     override fun onCreateContextMenu(

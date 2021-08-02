@@ -9,11 +9,11 @@ class BBaseDatosMemoria {
         init {
             arregloBUsuario
                 .add(
-                    BUsuario("Alejandro", "a@g.com")
+                    BUsuario("Alejandro", "a@g.com", null)
                 )
             arregloBUsuario
                 .add(
-                    BUsuario("Gabriela", "g@g.com")
+                    BUsuario("Gabriela", "g@g.com", null)
                 )
         }
     }

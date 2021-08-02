@@ -6,10 +6,12 @@ import android.os.Parcelable
 class BUsuario (
     val nombre: String?,
     val descripcion: String?,
+    val rutina: DRutina?,
 ) :Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readParcelable(DRutina::class.java.classLoader)
         ){
     }
     override fun describeContents(): Int {
@@ -18,6 +20,7 @@ class BUsuario (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(nombre)
         parcel.writeString(descripcion)
+        parcel.writeParcelable(rutina, flags)
     }
     companion object CREATOR : Parcelable.Creator<BUsuario> {
         override fun createFromParcel(parcel: Parcel): BUsuario {

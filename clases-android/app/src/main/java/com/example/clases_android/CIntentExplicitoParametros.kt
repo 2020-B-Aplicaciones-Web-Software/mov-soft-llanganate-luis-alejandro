@@ -13,10 +13,11 @@ class CIntentExplicitoParametros : AppCompatActivity() {
 
         val nombre = intent.getStringExtra("nombre")
         val apellido = intent.getStringExtra("apellido")
+        val usuario = intent.getParcelableExtra<BUsuario>("Alejandro")
 
         Log.i("intent-explicito", "${nombre}")
         Log.i("intent-explicito", "${apellido}")
-
+        Log.i("intent-explicito", "Usuario ${usuario}")
         val botonDevolverRespuesta = findViewById<Button>(R.id.btn_devolver_respuesta)
 
         botonDevolverRespuesta.setOnClickListener{
