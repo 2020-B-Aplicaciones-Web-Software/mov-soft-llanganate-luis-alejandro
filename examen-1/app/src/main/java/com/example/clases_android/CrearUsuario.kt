@@ -1,6 +1,7 @@
 package com.example.clases_android
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -47,11 +48,7 @@ class CrearUsuario : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        nombreCompleto.setText("")
-                        peso.setText("")
-                        sexo.setText("")
-                        telefonoMovil.setText("")
-                        direccionDomicilio.setText("")
+                        abrirActividad(ListaUsuarios::class.java)
                     } else {
                         Toast.makeText(
                             this,
@@ -76,6 +73,14 @@ class CrearUsuario : AppCompatActivity() {
                         .show()
                 }
         }
+    }
+
+    fun abrirActividad(clase: Class<*>){
+        val intentExplicito = Intent(
+            this,
+            clase
+        )
+        startActivity(intentExplicito)
     }
 
 }

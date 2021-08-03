@@ -58,11 +58,6 @@ class ListaUsuarios : AppCompatActivity() {
         Log.i("list-view", "List view ${posicionItemSeleccionado}")
     }
 
-    fun anadirItems(newItem: Usuario, array: ArrayList<Usuario>, adapter: ArrayAdapter<*>){
-        array.add(newItem);
-        adapter.notifyDataSetChanged();
-    }
-
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when(item?.itemId){
             // Editar

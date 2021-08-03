@@ -67,10 +67,10 @@ class SqliteHelperUsuario (
                 val id = resultadoConsulta.getInt(0)
                 if(id != null){
                     val _nombreCompleto = resultadoConsulta.getString(1)
-                    val _peso = resultadoConsulta.getDouble(1)
-                    val _sexo = resultadoConsulta.getString(2)
-                    val _telefonoCelular = resultadoConsulta.getString(3)
-                    val _direccionDomicilio = resultadoConsulta.getString(4)
+                    val _peso = resultadoConsulta.getDouble(2)
+                    val _sexo = resultadoConsulta.getString(3)
+                    val _telefonoCelular = resultadoConsulta.getString(4)
+                    val _direccionDomicilio = resultadoConsulta.getString(5)
                     usuarios.add(
                         Usuario(id, _nombreCompleto, _peso, _sexo, _telefonoCelular, _direccionDomicilio)
                     )
