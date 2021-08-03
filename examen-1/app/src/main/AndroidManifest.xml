@@ -14,14 +14,10 @@
         <activity android:name=".ActualizarUsuario" />
         <activity android:name=".CrearRutina" />
         <activity android:name=".CrearUsuario" />
-        <activity android:name=".GRecyclerView" />
-        <activity android:name=".CIntentExplicitoParametros" />
         <activity android:name=".ListaUsuarios" />
-        <activity android:name=".ACicloVida" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

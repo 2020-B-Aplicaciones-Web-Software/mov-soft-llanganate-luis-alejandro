@@ -25,10 +25,18 @@ class Rutina(
         return 0
     }
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(idRutina)
+        if(idUsuario != null){
+            parcel.writeInt(idUsuario)
+        }
         parcel.writeString(tipoEjercicio)
         if (numeroDeSeries != null) {
             parcel.writeInt(numeroDeSeries)
         }
+        if (cantidad != null) {
+            parcel.writeInt(cantidad)
+        }
+        parcel.writeString(dia)
     }
     companion object CREATOR : Parcelable.Creator<Rutina> {
         override fun createFromParcel(parcel: Parcel): Rutina {
@@ -39,6 +47,6 @@ class Rutina(
         }
     }
     override fun toString(): String {
-        return "Ejercicio: ${tipoEjercicio} - Series: ${numeroDeSeries} - Repeticiones: ${cantidad}"
+        return "Ejercicio: ${tipoEjercicio} - Series: ${numeroDeSeries} - Repeticiones: ${cantidad} - Dia: ${dia}"
     }
 }

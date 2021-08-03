@@ -18,7 +18,6 @@ class ListaUsuarios : AppCompatActivity() {
 
     // Base de datos
     val dbUsuarios = SqliteHelperUsuario(this)
-    val dbRutinas = SqliteHelperRutina(this)
     var arregloUsuarios = mutableListOf<Usuario>()
     var adapter : ArrayAdapter<Usuario>? = null
 
@@ -59,6 +58,9 @@ class ListaUsuarios : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
+
+        var user = adapter!!.getItem(posicionItemSeleccionado)
+
         return when(item?.itemId){
             // Editar
             R.id.mi_actualizarUsuario -> {
@@ -84,6 +86,13 @@ class ListaUsuarios : AppCompatActivity() {
                     }
                     setNegativeButton("No", null)
                 }.show()
+                return true
+            }
+            // Ir a rutinas de un usuario
+            R.id.mi_ver_rutina -> {
+                if (user != null) {
+                    abrirActividadConParametros(ListaRutinas::class.java, user)
+                }
                 return true
             }
             else -> super.onContextItemSelected(item)
