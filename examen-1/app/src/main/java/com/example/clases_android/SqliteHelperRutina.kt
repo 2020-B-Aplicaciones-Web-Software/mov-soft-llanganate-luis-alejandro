@@ -87,6 +87,35 @@ null,1
         return if (resultadoActualizacion == -1) false else true
     }
 
+    fun consultarRoutinasByUsuario(id:Int): ArrayList<Rutina> {
+        val sqlRutinaUsuario ="SELECT * FROM Rutina WHERE idUsuario==${id}"
+        val baseDatosLectura= readableDatabase
+        val resultaConsultaLectura= baseDatosLectura.rawQuery(
+            sqlRutinaUsuario,
+            null
+        )
+        val existeRutina= resultaConsultaLectura.moveToFirst()
+        val rutinas= arrayListOf<Rutina>()
+        if(existeRutina){
+            do{
+                val idRutina=resultaConsultaLectura.getInt(0)
+                val idUsuario=resultaConsultaLectura.getInt(1)
+                val tipoEjercicio= resultaConsultaLectura.getString(2)
+                val numeroSeries=resultaConsultaLectura.getInt(3)
+                val cantidad=resultaConsultaLectura.getInt(4)
+                val dia=resultaConsultaLectura.getString(5)
+                if(idRutina!=null){
+                    rutinas.add(
+                    Rutina(idRutina,idUsuario, tipoEjercicio, numeroSeries, cantidad, dia)
+                    )
+                }
+            }while (resultaConsultaLectura.moveToNext())
+        }
+        resultaConsultaLectura.close()
+        baseDatosLectura.close()
+        return rutinas
+    }
+
     fun eliminarRutina(id: Int) : Boolean {
         val conexionEscritura = writableDatabase
         val resultadoEliminacion = conexionEscritura
