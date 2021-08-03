@@ -50,6 +50,14 @@ class MainActivity : AppCompatActivity() {
                 )
                 startActivityForResult(intentContRespuestaImplicito, CODIGO_RESPUESTA_INTENT_IMPLICITO)
             }
+
+        val botonAbrirRecyclerView = findViewById<Button>(
+            R.id.btn_ir_recycler_view
+        )
+        botonAbrirRecyclerView
+            .setOnClickListener {
+                abrirActividadConParametros(GRecyclerView::class.java)
+            }
     }
 
     fun abrirActividadConParametros(
