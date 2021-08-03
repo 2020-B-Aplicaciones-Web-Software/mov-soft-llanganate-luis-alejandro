@@ -1,6 +1,5 @@
 package com.example.clases_android
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -12,11 +11,11 @@ class GRecyclerView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grecycler_view)
-        val listaUsuario = arrayListOf<BUsuario>()
-        val rutinaUsuario = DRutina("Kanto", 5)
+        val listaUsuario = arrayListOf<Usuario>()
+        val rutinaUsuario = Rutina("Kanto", 5)
         listaUsuario
             .add(
-                BUsuario(
+                Usuario(
                     "Vicente",
                     "1718137159",
                     rutinaUsuario
@@ -24,7 +23,7 @@ class GRecyclerView : AppCompatActivity() {
             )
         listaUsuario
             .add(
-                BUsuario(
+                Usuario(
                     "Adrian",
                     "0198137123",
                     rutinaUsuario
@@ -43,7 +42,7 @@ class GRecyclerView : AppCompatActivity() {
     }
 
     fun iniciarRecyclerView(
-        lista: List<BUsuario>,
+        lista: List<Usuario>,
         actividad: GRecyclerView,
         recyclerView: RecyclerView
     ){

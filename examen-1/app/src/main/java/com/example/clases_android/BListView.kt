@@ -29,7 +29,7 @@ class BListView : AppCompatActivity() {
         listViewEjemplo.adapter = adapter
         val botonAnadirItem = findViewById<Button>(R.id.btn_list_view_anadir)
         botonAnadirItem.setOnClickListener {
-            anadirItems(BUsuario("Anonimo", "a@g.con", null), arreglo, adapter)
+            anadirItems(Usuario("Anonimo", "a@g.con", null), arreglo, adapter)
         }
 
         listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->
@@ -92,7 +92,7 @@ class BListView : AppCompatActivity() {
         Log.i("list-view", "List view ${BBaseDatosMemoria.arregloBUsuario[id]}")
     }
 
-    fun anadirItems(newItem: BUsuario, array: ArrayList<BUsuario>, adapter: ArrayAdapter<*>){
+    fun anadirItems(newItem: Usuario, array: ArrayList<Usuario>, adapter: ArrayAdapter<*>){
         array.add(newItem);
         adapter.notifyDataSetChanged();
     }

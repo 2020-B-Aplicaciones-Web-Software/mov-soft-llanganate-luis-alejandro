@@ -13,7 +13,7 @@ class CIntentExplicitoParametros : AppCompatActivity() {
 
         val nombre = intent.getStringExtra("nombre")
         val apellido = intent.getStringExtra("apellido")
-        val usuario = intent.getParcelableExtra<BUsuario>("Alejandro")
+        val usuario = intent.getParcelableExtra<Usuario>("Alejandro")
 
         Log.i("intent-explicito", "${nombre}")
         Log.i("intent-explicito", "${apellido}")

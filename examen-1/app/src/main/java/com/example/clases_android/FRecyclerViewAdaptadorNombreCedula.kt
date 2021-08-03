@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class FRecyclerViewAdaptadorNombreCedula(
     private val contexto: GRecyclerView,
-    private val listaUsuario: List<BUsuario>,
+    private val listaUsuario: List<Usuario>,
     private val recyclerView: RecyclerView,
 ): RecyclerView.Adapter<FRecyclerViewAdaptadorNombreCedula.MyViewHolder>() {
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
