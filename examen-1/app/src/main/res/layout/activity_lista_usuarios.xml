@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <Button
-        android:id="@+id/btn_list_view_anadir"
+        android:id="@+id/btn_crear_nuevo_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"

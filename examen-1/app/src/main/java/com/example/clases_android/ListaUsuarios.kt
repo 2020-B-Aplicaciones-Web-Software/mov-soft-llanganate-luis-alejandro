@@ -1,5 +1,7 @@
 package com.example.clases_android
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,73 +14,33 @@ import androidx.appcompat.app.AlertDialog
 class ListaUsuarios : AppCompatActivity() {
 
     var posicionItemSeleccionado = 0
+    var CODIGO_RESPUESTA_INTENT_EXPLICITO = 402
 
+    // Base de datos
+    val dbUsuarios = SqliteHelperUsuario(this)
+    val dbRutinas = SqliteHelperRutina(this)
+    var arregloUsuarios = mutableListOf<Usuario>()
+    var adapter : ArrayAdapter<Usuario>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_usuarios)
         setTitle("Usuarios")
+        arregloUsuarios = dbUsuarios.consultarUsuarios()
+        val listView = findViewById<ListView>(R.id.txv_ejemplo)
 
-        // Base de datos
-        val dbUsuarios = SqliteHelperUsuario(this)
-        val dbRutinas = SqliteHelperRutina(this)
-        val arreglo = BBaseDatosMemoria.arregloBUsuario
-        val listViewEjemplo = findViewById<ListView>(R.id.txv_ejemplo)
-
-        val adapter =  ArrayAdapter(
+        adapter =  ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1, // Layout (Visual)
-            arreglo,
+            arregloUsuarios,
         )
+        listView.adapter = adapter
 
-        listViewEjemplo.adapter = adapter
-        val botonAnadirItem = findViewById<Button>(R.id.btn_list_view_anadir)
-        botonAnadirItem.setOnClickListener {
-          //  anadirItems(Usuario("Anonimo", "a@g.con", null), arreglo, adapter)
+        val botonCrearUsuario = findViewById<Button>(R.id.btn_crear_nuevo_usuario)
+        botonCrearUsuario.setOnClickListener {
+            abrirActividad(CrearUsuario::class.java)
         }
-
-        listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->
-            Toast.makeText(
-                this,
-                adapterView.getItemAtPosition(position).toString(),
-                Toast.LENGTH_LONG
-            ).show()
-
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Titulo")
-           // builder.setMessage("Mensaje")
-
-            val seleccionUsuario = booleanArrayOf(
-                true,
-                false,
-                false
-            )
-            val opciones = resources.getStringArray(R.array.string_array_opciones_dialogo)
-
-            builder.setMultiChoiceItems(
-                opciones,
-                seleccionUsuario,
-                { dialog, which, isChecked ->
-                    Log.i("list-view", "${which} - ${isChecked}")
-
-                }
-            )
-
-            builder.setPositiveButton(
-                "Si",
-                { dialog, which ->
-                    Log.i("list-view", "Si")
-                }
-            )
-            builder.setNegativeButton(
-                "No",
-                null
-            )
-            val dialogo = builder.create()
-            dialogo.show()
-        }
-
-      //  registerForContextMenu(listViewEjemplo)
+        registerForContextMenu(listView)
     }
 
     override fun onCreateContextMenu(
@@ -94,7 +56,6 @@ class ListaUsuarios : AppCompatActivity() {
         val id = info.position
         posicionItemSeleccionado = id
         Log.i("list-view", "List view ${posicionItemSeleccionado}")
-        Log.i("list-view", "List view ${BBaseDatosMemoria.arregloBUsuario[id]}")
     }
 
     fun anadirItems(newItem: Usuario, array: ArrayList<Usuario>, adapter: ArrayAdapter<*>){
@@ -107,20 +68,48 @@ class ListaUsuarios : AppCompatActivity() {
             // Editar
             R.id.mi_actualizarUsuario -> {
                 Log.i("list-view", "Editar ${
-                    BBaseDatosMemoria.arregloBUsuario[
-                        posicionItemSeleccionado
-                ]}")
+                   abrirActividadConParametros(
+                       ActualizarUsuario::class.java,
+                       arregloUsuarios[posicionItemSeleccionado]
+                   )
+                }")
                 return true
             }
             // Eliminar
             R.id.mi_eliminarUsuario -> {
-                Log.i("list-view", "Eliminar ${
-                    BBaseDatosMemoria.arregloBUsuario[
-                        posicionItemSeleccionado
-                ]}")
+                AlertDialog.Builder(this).apply {
+                    setTitle("Alerta")
+                    setMessage("¿Estás seguro de eliminar un usuario?")
+                    setPositiveButton("Si"){ dialog: DialogInterface, wich: Int ->
+                        val usuarioSeleccionado: Int? =arregloUsuarios[posicionItemSeleccionado].idUsuario
+                        if (usuarioSeleccionado != null) {
+                            dbUsuarios.eliminarUsuario(usuarioSeleccionado)
+                        }
+                        adapter?.remove(adapter!!.getItem(posicionItemSeleccionado));
+                    }
+                    setNegativeButton("No", null)
+                }.show()
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
     }
+
+    fun abrirActividad(clase: Class<*>){
+        val intentExplicito = Intent(
+            this,
+            clase
+        )
+        startActivity(intentExplicito)
+    }
+
+    fun abrirActividadConParametros(clase: Class<*>, usuario: Usuario){
+        val intentExplicito = Intent(
+            this,
+            clase
+        )
+        intentExplicito.putExtra("usuario", usuario)
+        startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
+    }
+
 }
