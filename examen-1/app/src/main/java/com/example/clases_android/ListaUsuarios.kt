@@ -13,10 +13,15 @@ class ListaUsuarios : AppCompatActivity() {
 
     var posicionItemSeleccionado = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_usuarios)
+        setTitle("Usuarios")
 
+        // Base de datos
+        val dbUsuarios = SqliteHelperUsuario(this)
+        val dbRutinas = SqliteHelperRutina(this)
         val arreglo = BBaseDatosMemoria.arregloBUsuario
         val listViewEjemplo = findViewById<ListView>(R.id.txv_ejemplo)
 
@@ -100,7 +105,7 @@ class ListaUsuarios : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when(item?.itemId){
             // Editar
-            R.id.mi_editar -> {
+            R.id.mi_actualizarUsuario -> {
                 Log.i("list-view", "Editar ${
                     BBaseDatosMemoria.arregloBUsuario[
                         posicionItemSeleccionado
@@ -108,7 +113,7 @@ class ListaUsuarios : AppCompatActivity() {
                 return true
             }
             // Eliminar
-            R.id.mi_eliminar -> {
+            R.id.mi_eliminarUsuario -> {
                 Log.i("list-view", "Eliminar ${
                     BBaseDatosMemoria.arregloBUsuario[
                         posicionItemSeleccionado
