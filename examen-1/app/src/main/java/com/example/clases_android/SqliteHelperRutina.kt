@@ -101,6 +101,5 @@ null,1
         return if(resultadoEliminacion.toInt() == -1) false else true
     }
 
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 }

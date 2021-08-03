@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         botonIrListView
             .setOnClickListener {
                 abrirCicloVida(
-                    BListView::class.java
+                    ListaUsuarios::class.java
                 )
             }
 

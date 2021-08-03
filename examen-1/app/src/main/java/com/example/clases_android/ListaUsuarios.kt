@@ -9,13 +9,13 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 
-class BListView : AppCompatActivity() {
+class ListaUsuarios : AppCompatActivity() {
 
     var posicionItemSeleccionado = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_blist_view)
+        setContentView(R.layout.activity_lista_usuarios)
 
         val arreglo = BBaseDatosMemoria.arregloBUsuario
         val listViewEjemplo = findViewById<ListView>(R.id.txv_ejemplo)
@@ -29,7 +29,7 @@ class BListView : AppCompatActivity() {
         listViewEjemplo.adapter = adapter
         val botonAnadirItem = findViewById<Button>(R.id.btn_list_view_anadir)
         botonAnadirItem.setOnClickListener {
-            anadirItems(Usuario("Anonimo", "a@g.con", null), arreglo, adapter)
+          //  anadirItems(Usuario("Anonimo", "a@g.con", null), arreglo, adapter)
         }
 
         listViewEjemplo.setOnItemClickListener(){adapterView, view, position, id ->

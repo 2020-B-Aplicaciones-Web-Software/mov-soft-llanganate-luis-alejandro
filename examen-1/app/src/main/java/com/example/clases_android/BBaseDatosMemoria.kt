@@ -7,14 +7,14 @@ class BBaseDatosMemoria {
         // Estaticos (Singleton)
         val arregloBUsuario = arrayListOf<Usuario>()
         init {
-            arregloBUsuario
+/*            arregloBUsuario
                 .add(
                     Usuario("Alejandro", "a@g.com", null)
                 )
             arregloBUsuario
                 .add(
                     Usuario("Gabriela", "g@g.com", null)
-                )
+                ) */
         }
     }
 }

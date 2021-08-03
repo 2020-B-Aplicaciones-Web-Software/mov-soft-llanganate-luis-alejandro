@@ -43,10 +43,10 @@ class FRecyclerViewAdaptadorNombreCedula(
 
     // Setaear los datos de cada iteracion del arreglo
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val entrenador = listaUsuario[position]
-        holder.nombreTextView.text = entrenador.nombre
-        holder.cedulaTextView.text = entrenador.descripcion
-        holder.acccionButton.text = "Like ${entrenador.nombre}"
+        val usuario = listaUsuario[position]
+        holder.nombreTextView.text = usuario.nombreCompleto
+        holder.cedulaTextView.text = usuario.telefonoCelular
+        holder.acccionButton.text = "Like ${usuario.nombreCompleto}"
         holder.likesTextView.text = "0"
     }
 

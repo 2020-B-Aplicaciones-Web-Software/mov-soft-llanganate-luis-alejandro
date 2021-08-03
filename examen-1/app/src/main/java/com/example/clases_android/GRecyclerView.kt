@@ -12,7 +12,7 @@ class GRecyclerView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grecycler_view)
         val listaUsuario = arrayListOf<Usuario>()
-        val rutinaUsuario = Rutina("Kanto", 5)
+   /*     val rutinaUsuario = Rutina("Kanto", 5)
         listaUsuario
             .add(
                 Usuario(
@@ -29,6 +29,8 @@ class GRecyclerView : AppCompatActivity() {
                     rutinaUsuario
                 )
             )
+            
+    */
         val recyclerViewEntrenador = findViewById<RecyclerView>(
             R.id.rv_entrenadores
         )
