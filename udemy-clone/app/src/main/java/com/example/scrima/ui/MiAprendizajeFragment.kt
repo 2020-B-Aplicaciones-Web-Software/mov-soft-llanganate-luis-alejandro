@@ -11,7 +11,7 @@ import com.example.scrima.entities.CursoUdemy
 import com.example.scrima.general.Settings
 import com.example.scrima.ui.adapters.CursosTomadosAdapter
 
-class MiAprendizajeFragment : Fragment(R.layout.fragment_records) {
+class MiAprendizajeFragment : Fragment(R.layout.fragment_aprendizaje) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -21,7 +21,7 @@ class MiAprendizajeFragment : Fragment(R.layout.fragment_records) {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_records, container, false)
+        val view = inflater.inflate(R.layout.fragment_aprendizaje, container, false)
         val recordsList = Settings.datosCursosTomados
         val recyclerView= view.findViewById<RecyclerView>(
             R.id.list_record_recyclerview

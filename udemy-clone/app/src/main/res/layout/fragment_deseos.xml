@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MiAprendizajeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
+    tools:context=".ui.ListaDeDeseosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_record_recyclerview"
+        android:id="@+id/list_deseos_recyclerview"
         android:layout_width="405dp"
         android:layout_height="611dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,6 +15,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
