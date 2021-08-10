@@ -4,15 +4,17 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class CursoUdemy (
-    val ipGateway : String?,
-    val company: String?,
-    val date : String?,
-    val time: String?
+    val titulo : String?,
+    val instructor: String?,
+    val progreso : Int?,
+    val precio: Double?,
+    val urlImagen: String?
     ) :Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readInt(),
+        parcel.readDouble(),
         parcel.readString()
     ){
         }
@@ -22,15 +24,15 @@ class CursoUdemy (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(ipGateway)
-        parcel.writeString(company)
-        parcel.writeString(date)
-        parcel.writeString(time)
+        parcel.writeString(titulo)
+        parcel.writeString(instructor)
+        if(progreso != null && precio != null) {
+            parcel.writeInt(progreso)
+            parcel.writeDouble(precio)
+        }
+        parcel.writeString(urlImagen)
     }
 
-    override fun toString(): String {
-        return "ScanRecord(gateway=$ipGateway, empresa=$company, fecha=$date, hora=$time)"
-    }
 
     companion object CREATOR : Parcelable.Creator<CursoUdemy> {
         override fun createFromParcel(parcel: Parcel): CursoUdemy {

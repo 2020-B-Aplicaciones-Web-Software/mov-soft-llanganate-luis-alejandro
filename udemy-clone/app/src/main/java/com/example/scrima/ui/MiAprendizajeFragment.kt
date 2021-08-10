@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scrima.R
 import com.example.scrima.entities.CursoUdemy
+import com.example.scrima.general.Settings
 import com.example.scrima.ui.adapters.CursosTomadosAdapter
 
 class MiAprendizajeFragment : Fragment(R.layout.fragment_records) {
@@ -21,13 +22,7 @@ class MiAprendizajeFragment : Fragment(R.layout.fragment_records) {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_records, container, false)
-        val recordsList = arrayListOf<CursoUdemy>(
-            CursoUdemy("192.168.1.2", "Huawei Technology", "18-02-2007", "04:00PM"),
-            CursoUdemy("192.168.1.3", "Huawei Technology", "18-02-2007", "04:00PM"),
-            CursoUdemy("192.168.1.4", "Huawei Technology", "18-02-2007", "04:00PM"),
-            CursoUdemy("192.168.1.5", "Huawei Technology", "18-02-2007", "04:00PM"),
-            CursoUdemy("192.168.1.6", "Huawei Technology", "18-02-2007", "04:00PM")
-        )
+        val recordsList = Settings.datosCursosTomados
         val recyclerView= view.findViewById<RecyclerView>(
             R.id.list_record_recyclerview
         )

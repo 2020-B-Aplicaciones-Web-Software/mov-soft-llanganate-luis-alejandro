@@ -3,11 +3,14 @@ package com.example.scrima.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scrima.entities.CursoUdemy
 import com.example.scrima.ui.HomeActivity
 import android.widget.TextView
 import com.example.scrima.R
+import com.squareup.picasso.Picasso
 
 class CursosTomadosAdapter(
     private val context: HomeActivity,
@@ -16,15 +19,17 @@ class CursosTomadosAdapter(
 ) : RecyclerView.Adapter<CursosTomadosAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val ipAddressTextView: TextView
-        val companyTextView: TextView
-        val dateTextView: TextView
-        val timeTextView: TextView
+        val tituloTextView: TextView
+        val instructorTextView: TextView
+        val barraProgreso : ProgressBar
+        val progresoTextView: TextView
+        val portadaImageView: ImageView
         init {
-            ipAddressTextView = view.findViewById(R.id.tv_ip_list_record)
-            companyTextView = view.findViewById(R.id.tv_producer_list_record)
-            dateTextView = view.findViewById(R.id.tv_date_record)
-            timeTextView = view.findViewById(R.id.tv_time_record)
+            tituloTextView = view.findViewById(R.id.tv_titulo_curso_faprendizaje)
+            instructorTextView = view.findViewById(R.id.tv_instructor_faprendizaje)
+            progresoTextView = view.findViewById(R.id.tv_porcentaje_faprendizaje)
+            barraProgreso = view.findViewById(R.id.pb_progreso_faprendizaje)
+            portadaImageView = view.findViewById(R.id.iconImageView_faprendizaje)
         }
     }
 
@@ -33,7 +38,7 @@ class CursosTomadosAdapter(
         val itemView = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.list_record,
+                R.layout.item_curso_tomado,
                 parent,
                 false,
             )
@@ -42,11 +47,14 @@ class CursosTomadosAdapter(
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val scanRecord = records[position]
-        holder.ipAddressTextView.text = scanRecord.ipGateway
-        holder.companyTextView.text = scanRecord.company
-        holder.dateTextView.text = scanRecord.date
-        holder.timeTextView.text = scanRecord.time
+        val curso = records[position]
+        holder.tituloTextView.text = curso.titulo
+        holder.instructorTextView.text = curso.instructor
+        if(curso.progreso != null) {
+            holder.barraProgreso.setProgress(curso.progreso)
+        }
+        holder.progresoTextView.text = "${curso.progreso}%"
+        Picasso.get().load(curso.urlImagen).into(holder.portadaImageView)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

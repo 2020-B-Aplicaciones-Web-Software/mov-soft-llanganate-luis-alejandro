@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
+    app:cardElevation="0dp"
     app:cardUseCompatPadding="true"
     >
     <LinearLayout
@@ -23,11 +22,10 @@
             android:padding="6dp"
             >
             <ImageView
-                android:id="@+id/iconImageView"
+                android:id="@+id/iconImageView_faprendizaje"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:paddingLeft="14dp"
                 android:paddingRight="14dp"
@@ -43,8 +41,8 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/iconImageView"
-                android:layout_toRightOf="@+id/iconImageView"
+                android:layout_toEndOf="@+id/iconImageView_faprendizaje"
+                android:layout_toRightOf="@+id/iconImageView_faprendizaje"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -56,29 +54,28 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tv_titulo_curso_faprendizaje"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gateway:"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_ip_list_record"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="192.168.2.4"
+                        android:text="Complete python Developer in 2021: Zero To Mastery"
                         android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tv_producer_list_record"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_instructor_faprendizaje"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:text="Huawei Technology Corp"
-                    android:textColor="#2D8A9C" />
+                    android:text="Andrei Neagoie"
+                    android:textColor="#989B9C" />
+
+                <ProgressBar
+                    android:id="@+id/pb_progreso_faprendizaje"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,36 +83,19 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="62dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_weight="1"
-                        android:text="Fecha:"
-                        android:textAlignment="textStart"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_date_record"
-                        android:layout_width="93dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:text="26/07/2021" />
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="62dp"
+                        android:id="@+id/tv_porcentaje_faprendizaje"
+                        android:layout_width="88dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Hora:"
-                        android:textAlignment="textStart"
+                        android:text="98%"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_time_record"
-                        android:layout_width="86dp"
+                        android:layout_width="247dp"
                         android:layout_height="wrap_content"
-                        android:text="14:00 PM" />
+                        android:text="completado" />
                 </LinearLayout>
 
             </LinearLayout>

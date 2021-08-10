@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/navigation_history"
-        android:title="Historial"
-        android:icon="@drawable/ic_baseline_devices_24" />
-    <item android:id="@+id/navigation_scan"
-        android:title="Escanear"
-        android:icon="@drawable/ic_baseline_network_check_24" />
-    <item android:id="@+id/navigation_profile"
-        android:title="Perfil"
+    <item android:id="@+id/navegacion_mi_aprendizaje"
+        android:title="Mi aprendizaje"
+        android:icon="@drawable/ic_baseline_play_circle_filled_24" />
+    <item android:id="@+id/navegacion_lista_deseos"
+        android:title="Lista de deseos"
+        android:icon="@drawable/ic_baseline_thumb_up_alt_24" />
+    <item android:id="@+id/navegacion_cuenta"
+        android:title="Cuenta"
         android:icon="@drawable/ic_baseline_person_24" />
 </menu>

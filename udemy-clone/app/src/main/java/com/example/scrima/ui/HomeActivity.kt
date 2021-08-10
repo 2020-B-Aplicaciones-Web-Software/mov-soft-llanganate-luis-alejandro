@@ -2,14 +2,9 @@ package com.example.scrima.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.scrima.R
-import com.example.scrima.entities.Usuario
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity() {
 
@@ -22,27 +17,28 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-
+        setTitle("Cursos tomados")
         // According to bottom vavegation
         setFragmentsForNavigation()
-
     }
 
     fun setFragmentsForNavigation(){
         findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             .setOnItemSelectedListener {
                 when(it.itemId) {
-                    R.id.navigation_history -> {
+                    R.id.navegacion_mi_aprendizaje -> {
                         setCurrentFragment(idContainerView, recordsFragment)
+                        setTitle("Cursos tomados")
                         true
                     }
-                    R.id.navigation_scan -> {
+                    R.id.navegacion_lista_deseos -> {
                         setCurrentFragment(idContainerView, scanFragment)
+                        setTitle("Lista de deseos")
                         true
                     }
-                    R.id.navigation_profile -> {
+                    R.id.navegacion_cuenta -> {
                         setCurrentFragment(idContainerView, profileFragment)
+                        setTitle("Mi perfil")
                         true
                     }
                     else -> false
