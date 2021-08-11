@@ -30,6 +30,7 @@ class CursosTomadosAdapter(
         val barraProgreso : ProgressBar
         val progresoTextView: TextView
         val portadaImageView: ImageView
+        var urlImg : String = "";
         init {
             tituloTextView = view.findViewById(R.id.tv_titulo_curso_faprendizaje)
             instructorTextView = view.findViewById(R.id.tv_instructor_faprendizaje)
@@ -46,7 +47,9 @@ class CursosTomadosAdapter(
                             R.id.navegacion_ver_curso -> {
                                 Log.i("test-cuac", "${item}")
                                 openActivityWithParams(view.context, CursoTomadoActivity::class.java, arrayListOf(
-                                    Pair("hola", "adios")
+                                    Pair("titulo", tituloTextView.text.toString()),
+                                    Pair("instructor", instructorTextView.text.toString()),
+                                    Pair("imagenUrl", urlImg)
                                 ))
                             }
                         }
@@ -80,6 +83,7 @@ class CursosTomadosAdapter(
         }
         holder.progresoTextView.text = "${curso.progreso}%"
         Picasso.get().load(curso.urlImagen).into(holder.portadaImageView)
+        holder.urlImg = curso.urlImagen.toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
