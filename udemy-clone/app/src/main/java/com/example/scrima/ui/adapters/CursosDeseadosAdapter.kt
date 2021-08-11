@@ -1,12 +1,11 @@
 package com.example.scrima.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scrima.R
 import com.example.scrima.entities.CursoUdemy
@@ -14,10 +13,8 @@ import com.example.scrima.ui.HomeActivity
 import com.squareup.picasso.Picasso
 
 class CursosDeseadosAdapter(
-    private val context: HomeActivity,
-    private val cursosDeseados: List<CursoUdemy>,
-    private val recyclerView: RecyclerView
-) : RecyclerView.Adapter<CursosDeseadosAdapter.MyViewHolder>() {
+    private val cursosDeseados: List<CursoUdemy>
+) : RecyclerView.Adapter<CursosDeseadosAdapter.MyViewHolder>()  {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tituloTextView: TextView
@@ -26,6 +23,7 @@ class CursosDeseadosAdapter(
         val calificacionPromedioRatingBar : RatingBar
         val cantidadCalificadoresTextView: TextView
         val portadaImageView: ImageView
+
         init {
             tituloTextView = view.findViewById(R.id.tv_titulo_curso_fdeseos)
             instructorTextView = view.findViewById(R.id.tv_instructor_fdeseos)
@@ -33,6 +31,7 @@ class CursosDeseadosAdapter(
             calificacionPromedioRatingBar = view.findViewById(R.id.ratingcurso_fdeseo)
             cantidadCalificadoresTextView = view.findViewById(R.id.tv_cantidad_calificadores_fdeseos)
             portadaImageView = view.findViewById(R.id.iconImageView_fdeseos)
+
         }
     }
 

@@ -8,6 +8,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.scrima.entities.CursoUdemy
+import com.example.scrima.entities.Usuario
+
+open class RecyclerViewItem
+class UserItem(val user: Usuario) : RecyclerViewItem()
+class OptionsItem() : RecyclerViewItem()
 
 class Settings {
 

@@ -1,22 +1,28 @@
 package com.example.scrima.ui.adapters
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.scrima.entities.CursoUdemy
 import com.example.scrima.ui.HomeActivity
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.example.scrima.R
+import com.example.scrima.ui.CursoTomadoActivity
+import com.example.scrima.ui.MiAprendizajeFragment
 import com.squareup.picasso.Picasso
 
 class CursosTomadosAdapter(
-    private val context: HomeActivity,
-    private val records: List<CursoUdemy>,
-    private val recyclerView: RecyclerView
-) : RecyclerView.Adapter<CursosTomadosAdapter.MyViewHolder>() {
+    private val records: List<CursoUdemy>
+    ) : RecyclerView.Adapter<CursosTomadosAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tituloTextView: TextView
@@ -30,6 +36,25 @@ class CursosTomadosAdapter(
             progresoTextView = view.findViewById(R.id.tv_porcentaje_faprendizaje)
             barraProgreso = view.findViewById(R.id.pb_progreso_faprendizaje)
             portadaImageView = view.findViewById(R.id.iconImageView_faprendizaje)
+            view.findViewById<CardView>(R.id.card_network_record)
+                .setOnLongClickListener {
+                    val pop= PopupMenu(view.context,it)
+                    pop.inflate(R.menu.menu_curso)
+                    pop.setOnMenuItemClickListener {item->
+                        when(item.itemId)
+                        {
+                            R.id.navegacion_ver_curso -> {
+                                Log.i("test-cuac", "${item}")
+                                openActivityWithParams(view.context, CursoTomadoActivity::class.java, arrayListOf(
+                                    Pair("hola", "adios")
+                                ))
+                            }
+                        }
+                        true
+                    }
+                    pop.show()
+                    true
+                }
         }
     }
 
@@ -59,4 +84,17 @@ class CursosTomadosAdapter(
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int = records.size
+
+    fun openActivityWithParams(context: Context, classReference: Class<*>, params:  ArrayList<Pair<String, String>>) {
+        val intent = Intent(
+            context,
+            classReference
+        )
+        params.forEach {
+                param ->
+            var (key, value) = param
+            intent.putExtra(key, value)
+        }
+        context.startActivity(intent)
+    }
 }
