@@ -14,9 +14,7 @@ import com.example.scrima.ui.HomeActivity
 import com.squareup.picasso.Picasso
 
 class CursosDeseadosAdapter(
-    private val context: HomeActivity,
-    private val cursosDeseados: List<CursoUdemy>,
-    private val recyclerView: RecyclerView
+    private val cursosDeseados: List<CursoUdemy>
 ) : RecyclerView.Adapter<CursosDeseadosAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){

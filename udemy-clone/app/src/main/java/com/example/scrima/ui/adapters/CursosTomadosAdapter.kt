@@ -13,10 +13,8 @@ import com.example.scrima.R
 import com.squareup.picasso.Picasso
 
 class CursosTomadosAdapter(
-    private val context: HomeActivity,
-    private val records: List<CursoUdemy>,
-    private val recyclerView: RecyclerView
-) : RecyclerView.Adapter<CursosTomadosAdapter.MyViewHolder>() {
+    private val records: List<CursoUdemy>
+    ) : RecyclerView.Adapter<CursosTomadosAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tituloTextView: TextView

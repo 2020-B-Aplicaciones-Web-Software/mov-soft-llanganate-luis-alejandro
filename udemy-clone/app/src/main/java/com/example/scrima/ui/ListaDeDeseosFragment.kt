@@ -27,19 +27,16 @@ class ListaDeDeseosFragment : Fragment(R.layout.fragment_deseos) {
         val recyclerView= view.findViewById<RecyclerView>(
             R.id.list_deseos_recyclerview
         )
-        initRecyclerView(recordsList, HomeActivity(), recyclerView)
+        initRecyclerView(recordsList, recyclerView)
         return view
     }
 
     fun initRecyclerView(
         list: List<CursoUdemy>,
-        activity: HomeActivity,
         recyclerView: RecyclerView
     ){
         val adapter = CursosDeseadosAdapter(
-            activity,
-            list,
-            recyclerView
+            list
         )
         recyclerView.adapter = adapter
         recyclerView.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
