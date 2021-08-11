@@ -41,7 +41,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     ){
         val dataSet = arrayListOf<RecyclerViewItem>(
             UserItem(
-                Usuario("Luis Alejandro Llanganate Valencia", "luis.llanganate@epn.edu.ec")
+                Usuario("Eduardo Alejandro Llanganate Valencia", "luis.llanganate@epn.edu.ec")
             ),
             OptionsItem()
         )
