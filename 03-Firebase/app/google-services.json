@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1069983326438",
+    "project_id": "moviles-android-software",
+    "storage_bucket": "moviles-android-software.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069983326438:android:07468f9132f2ae89dc1b27",
+        "android_client_info": {
+          "package_name": "com.example.a02_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069983326438-ieunn5kle8sfvoifnfn6d0esmsrhagrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnvmJc53Siuc56Z4Jt99E3CLduq_ScghE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069983326438-ieunn5kle8sfvoifnfn6d0esmsrhagrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069983326438:android:0490d79058967f80dc1b27",
+        "android_client_info": {
+          "package_name": "com.example.firabasedos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069983326438-ieunn5kle8sfvoifnfn6d0esmsrhagrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnvmJc53Siuc56Z4Jt99E3CLduq_ScghE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069983326438-ieunn5kle8sfvoifnfn6d0esmsrhagrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
