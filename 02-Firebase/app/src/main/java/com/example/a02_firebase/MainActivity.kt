@@ -55,6 +55,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val botonMapa = findViewById<Button>(R.id.btn_ir_mapa)
+        botonMapa.setOnClickListener {
+            val intent = Intent(
+                this,
+                FMapsActivity::class.java
+            )
+            startActivity(intent)
+        }
+
         setearBienvenida()
     }
 
