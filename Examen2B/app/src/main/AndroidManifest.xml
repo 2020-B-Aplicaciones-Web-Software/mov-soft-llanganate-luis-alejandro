@@ -31,13 +31,11 @@
         <activity android:name=".activities.ActualizarUsuarioActivity" />
         <activity android:name=".activities.ActualizarRutinaActivity" />
         <activity android:name=".activities.ListarRutinasActivity" />
-        <activity android:name=".activities.ListarUsuariosActivity" />
         <activity android:name=".activities.CrearRutinaActivity" />
         <activity android:name=".activities.CrearUsuarioActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.ListarUsuariosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
