@@ -1,4 +1,4 @@
-package com.example.examen2b.activities
+package com.example.examen2b.activities.users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.examen2b.activities
+package com.example.examen2b.activities.users
 
 import android.content.Context
 import android.content.Intent
