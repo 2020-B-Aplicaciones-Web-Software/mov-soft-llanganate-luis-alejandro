@@ -24,7 +24,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginBottom="39dp"
         android:gravity="center"
-        android:text="Actualización"
+        android:text="Actualizar información"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutActualizarUsuario"
