@@ -3,7 +3,6 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Usuario (
-    val idUsuario: Int,
     val nombreCompleto: String?,
     val peso: Double?,
     val sexo: String?,
@@ -11,7 +10,6 @@ class Usuario (
     val direccionDomicilio: String?,
 ) :Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString(),
         parcel.readDouble(),
         parcel.readString(),
@@ -25,7 +23,6 @@ class Usuario (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(idUsuario)
         parcel.writeString(nombreCompleto)
         if (peso != null) {
             parcel.writeDouble(peso)
