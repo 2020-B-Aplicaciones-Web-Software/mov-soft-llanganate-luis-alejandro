@@ -45,25 +45,16 @@ class CrearUsuarioActivity : AppCompatActivity() {
                .collection("usuarios")
                .add(nuevoUsuario)
                .addOnSuccessListener {
-                   showMessage("Se ha creado correctamente el usuario ${nombre.text.toString()}")
+                   Settings.showMessage(this,"Se ha creado correctamente el usuario ${nombre.text.toString()}")
                    Settings.clearInputs(arrayListOf(nombre,peso,sexo,telefono,direccion))
                }
                .addOnFailureListener { exception ->
-                   showMessage("Error en crear el usuario")
+                   Settings.showMessage(this,"Error en crear el usuario")
                    Log.i("usuarios", exception.toString())
                }
         }
         else{
-            showMessage("Ingrese todos los datos requeridos")
+            Settings.showMessage(this, "Ingrese todos los datos requeridos")
         }
-    }
-
-
-    private fun showMessage(message: String){
-        Toast.makeText(
-            this,
-            message,
-            Toast.LENGTH_SHORT
-        ).show()
     }
 }
