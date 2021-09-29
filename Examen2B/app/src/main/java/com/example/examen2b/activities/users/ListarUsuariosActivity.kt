@@ -39,6 +39,11 @@ class ListarUsuariosActivity : AppCompatActivity() {
         listarUsuarios()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        listarUsuarios()
+    }
+
     fun listarUsuarios(){
         FirebaseConnection.getFirestoreReference()
             .collection("usuarios")

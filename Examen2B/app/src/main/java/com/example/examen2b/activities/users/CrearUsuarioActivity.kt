@@ -43,8 +43,7 @@ class CrearUsuarioActivity : AppCompatActivity() {
            )
            FirebaseConnection.getFirestoreReference()
                .collection("usuarios")
-               .document("${nombre.text.toString()}|${telefono.text.toString()}")
-               .set(nuevoUsuario)
+               .add(nuevoUsuario)
                .addOnSuccessListener {
                    Settings.showMessage(this,"Se ha creado correctamente el usuario ${nombre.text.toString()}")
                    Settings.clearInputs(arrayListOf(nombre,peso,sexo,telefono,direccion))
