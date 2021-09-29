@@ -4,20 +4,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Rutina(
-    val idRutina: Int,
-    val idUsuario : Int?,
     val tipoEjercicio: String?,
     val numeroDeSeries: Int?,
     val cantidad: Int?,
     val dia: String?,
+    val latitud: Double,
+    val longitud: Double,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
+        parcel.readDouble(),
+        parcel.readDouble()
     ){
     }
 
@@ -26,10 +26,6 @@ class Rutina(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(idRutina)
-        if(idUsuario != null){
-            parcel.writeInt(idUsuario)
-        }
         parcel.writeString(tipoEjercicio)
         if (numeroDeSeries != null) {
             parcel.writeInt(numeroDeSeries)
@@ -38,6 +34,8 @@ class Rutina(
             parcel.writeInt(cantidad)
         }
         parcel.writeString(dia)
+        parcel.writeDouble(longitud)
+        parcel.writeDouble(latitud)
     }
 
     companion object CREATOR : Parcelable.Creator<Rutina> {
