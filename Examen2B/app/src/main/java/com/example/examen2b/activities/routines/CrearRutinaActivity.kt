@@ -21,24 +21,25 @@ class CrearRutinaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_crear_rutina)
         setTitle("Crear una nueva rutina")
         val btnRegistrarRutina = findViewById<Button>(R.id.btn_registrar_rutina)
-        btnRegistrarRutina.setOnClickListener{
-    }
+        btnRegistrarRutina.setOnClickListener {
+        }
 
-    fun crearRutina(){
-        val tipoEjercicio = findViewById<EditText>(R.id.c_input_tipo_ejercicio)
-        val series =  findViewById<EditText>(R.id.c_input_series)
-        val cantidad =  findViewById<EditText>(R.id.c_input_cantidad)
-        val dia =  findViewById<EditText>(R.id.c_input_dia)
-        val latitud = findViewById<EditText>(R.id.c_input_latitud)
-        val longitud = findViewById<EditText>(R.id.c_input_altitud)
+        fun crearRutina() {
+            val tipoEjercicio = findViewById<EditText>(R.id.c_input_tipo_ejercicio)
+            val series = findViewById<EditText>(R.id.c_input_series)
+            val cantidad = findViewById<EditText>(R.id.c_input_cantidad)
+            val dia = findViewById<EditText>(R.id.c_input_dia)
+            val latitud = findViewById<EditText>(R.id.c_input_latitud)
+            val longitud = findViewById<EditText>(R.id.c_input_altitud)
 
-        val usuario = intent.getParcelableExtra<Usuario>("usuario")!!
+            val usuario = intent.getParcelableExtra<Usuario>("usuario")!!
 
 
-            val isFieldsNotBlanks = tipoEjercicio.text.isNotBlank() && series.text.isNotBlank() && cantidad.text.isNotBlank() &&
-                    dia.text.isNotBlank()
-            if (isFieldsNotBlanks){
-                val builder= AlertDialog.Builder(this)
+            val isFieldsNotBlanks =
+                tipoEjercicio.text.isNotBlank() && series.text.isNotBlank() && cantidad.text.isNotBlank() &&
+                        dia.text.isNotBlank()
+            if (isFieldsNotBlanks) {
+                val builder = AlertDialog.Builder(this)
                 builder.setTitle("Registro")
                 builder.setMessage("¿Estás seguro de crear una nueva rutina?")
                 builder.setPositiveButton(
@@ -61,7 +62,7 @@ class CrearRutinaActivity : AppCompatActivity() {
                     refUser
                         .get()
                         .addOnSuccessListener { result ->
-                            for(document in result){
+                            for (document in result) {
                                 FirebaseConnection.getFirestoreReference()
                                     .collection("usuarios")
                                     .document(document.id)
@@ -69,10 +70,19 @@ class CrearRutinaActivity : AppCompatActivity() {
                                     .add(nuevaRutina)
                                     .addOnSuccessListener {
                                         Settings.clearInputs(
-                                            arrayListOf(tipoEjercicio,series
-                                            ,cantidad,dia, longitud, latitud)
+                                            arrayListOf(
+                                                tipoEjercicio,
+                                                series,
+                                                cantidad,
+                                                dia,
+                                                longitud,
+                                                latitud
+                                            )
                                         )
-                                        Settings.showMessage(this, "Se ha creado una rutina para ${usuario.nombreCompleto}")
+                                        Settings.showMessage(
+                                            this,
+                                            "Se ha creado una rutina para ${usuario.nombreCompleto}"
+                                        )
                                     }
                             }
                         }
@@ -81,27 +91,11 @@ class CrearRutinaActivity : AppCompatActivity() {
                     "No",
                     null
                 )
-                val dialog=builder.create()
+                val dialog = builder.create()
                 dialog.show()
             } else {
                 Settings.showMessage(this, "Formulario no válido")
             }
         }
-
-    fun abrirActividad(clase: Class<*>){
-        val intentExplicito = Intent(
-            this,
-            clase
-        )
-        startActivity(intentExplicito)
-    }
-
-    fun abrirActividadConParametrosUsuario(clase: Class<*>, usuario: Usuario){
-        val intentExplicito = Intent(
-            this,
-            clase
-        )
-        intentExplicito.putExtra("usuario", usuario)
-        startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
     }
 }
