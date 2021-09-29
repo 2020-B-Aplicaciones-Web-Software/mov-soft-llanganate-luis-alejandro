@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.viewpager2.widget.ViewPager2
 import com.example.examen2b.R
+import com.example.examen2b.activities.MapaActivity
 import com.example.examen2b.entities.Rutina
 import com.example.examen2b.entities.Usuario
 import com.example.examen2b.public.FirebaseConnection
@@ -23,6 +24,7 @@ class ListarRutinasActivity : AppCompatActivity() {
     var arregloRutinas = arrayListOf<Rutina>()
     var adapter : ArrayAdapter<Rutina>? = null
     var usuario : Usuario = Usuario(null,null,null,null,null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_rutinas)
@@ -104,13 +106,16 @@ class ListarRutinasActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
+        usuario = intent.getParcelableExtra<Usuario>("usuario")!!
+
         return when(item?.itemId){
             // Editar
             R.id.mi_actualizar_rutina -> {
                 Log.i("list-view", "Editar ${arregloRutinas[posicionItemSeleccionado]}")
                 abrirActividadConParametrosRutina(
                     ActualizarRutinaActivity::class.java,
-                    arregloRutinas[posicionItemSeleccionado]
+                    arregloRutinas[posicionItemSeleccionado],
+                    usuario
                 )
                 return true
             }
@@ -126,6 +131,13 @@ class ListarRutinasActivity : AppCompatActivity() {
                     }
                     setNegativeButton("No", null)
                 }.show()
+                return true
+            }
+
+            // Go to mapa
+            R.id.mi_ver_mapa -> {
+                val rutinaSeleccionada: Rutina =arregloRutinas[posicionItemSeleccionado]
+                abrirActividadConParametrosRutina(MapaActivity::class.java, rutinaSeleccionada, usuario)
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -166,20 +178,13 @@ class ListarRutinasActivity : AppCompatActivity() {
             }
     }
 
-    fun abrirActividad(clase: Class<*>){
-        val intentExplicito = Intent(
-            this,
-            clase
-        )
-        startActivity(intentExplicito)
-    }
-
-    fun abrirActividadConParametrosRutina(clase: Class<*>, rut: Rutina){
+    fun abrirActividadConParametrosRutina(clase: Class<*>, rut: Rutina, user: Usuario){
         val intentExplicito = Intent(
             this,
             clase
         )
         intentExplicito.putExtra("rutina", rut)
+        intentExplicito.putExtra("usuario", user)
         startActivityForResult(intentExplicito,CODIGO_RESPUESTA_INTENT_EXPLICITO)
     }
 
