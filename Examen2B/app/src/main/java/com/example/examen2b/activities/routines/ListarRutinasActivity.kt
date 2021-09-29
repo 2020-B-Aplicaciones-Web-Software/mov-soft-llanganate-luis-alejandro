@@ -1,5 +1,6 @@
 package com.example.examen2b.activities.routines
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -119,10 +120,8 @@ class ListarRutinasActivity : AppCompatActivity() {
                     setTitle("Eliminación")
                     setMessage("¿Estás seguro de eliminar una rutina?")
                     setPositiveButton("Si"){ dialog: DialogInterface, wich: Int ->
-                        val rutinaSeleccionada: Int? =arregloRutinas[posicionItemSeleccionado].idRutina
-                        if (rutinaSeleccionada != null) {
-                            dbRutinas.eliminarRutina(rutinaSeleccionada)
-                        }
+                        val rutinaSeleccionada: Rutina =arregloRutinas[posicionItemSeleccionado]
+                        eliminarRutina(rutinaSeleccionada)
                         adapter?.remove(adapter!!.getItem(posicionItemSeleccionado));
                     }
                     setNegativeButton("No", null)
@@ -131,6 +130,40 @@ class ListarRutinasActivity : AppCompatActivity() {
             }
             else -> super.onContextItemSelected(item)
         }
+    }
+
+    fun eliminarRutina(rutina: Rutina){
+        val refUsuario = FirebaseConnection.getFirestoreReference()
+            .collection("usuarios")
+            .whereEqualTo("nombre", usuario.nombreCompleto)
+            .whereEqualTo("sexo", usuario.sexo)
+            .whereEqualTo("telefono", usuario.telefonoCelular)
+            .whereEqualTo("direccion", usuario.direccionDomicilio)
+
+        refUsuario
+            .get()
+            .addOnSuccessListener { result ->
+                for(document in result){
+                    val refUsuarios = FirebaseConnection.getFirestoreReference()
+                        .collection("usuarios")
+                        .document(document.id)
+
+                    refUsuarios.collection("rutinas")
+                        .whereEqualTo("tipoEjercicio", rutina.tipoEjercicio)
+                        .whereEqualTo("series", rutina.numeroDeSeries)
+                        .whereEqualTo("cantidad", rutina.cantidad)
+                        .whereEqualTo("dia", rutina.dia)
+                        .whereEqualTo("longitud", rutina.longitud)
+                        .whereEqualTo("latitud", rutina.latitud)
+                        .get()
+                        .addOnSuccessListener { resultRutina ->
+                            for(documentoRutina in resultRutina){
+                               refUsuarios.collection("rutinas").document(documentoRutina.id).delete()
+                            }
+                        }
+                    mostrarRutinas()
+                }
+            }
     }
 
     fun abrirActividad(clase: Class<*>){
