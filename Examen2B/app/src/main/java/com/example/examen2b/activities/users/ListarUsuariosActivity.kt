@@ -18,6 +18,7 @@ import com.example.examen2b.R
 import com.example.examen2b.activities.routines.ListarRutinasActivity
 import com.example.examen2b.entities.Usuario
 import com.example.examen2b.public.FirebaseConnection
+import com.example.examen2b.public.Settings
 
 class ListarUsuariosActivity : AppCompatActivity() {
 
@@ -108,8 +109,22 @@ class ListarUsuariosActivity : AppCompatActivity() {
                     setPositiveButton("Si"){ dialog: DialogInterface, wich: Int ->
                         val usuarioSeleccionado: Usuario? = usuarios[posicionItemSeleccionado]
                         if (usuarioSeleccionado != null) {
-                       //     dbUsuarios.eliminarUsuario(usuarioSeleccionado)
-                        }
+                            val ref = FirebaseConnection.getFirestoreReference()
+                                .collection("usuarios")
+                                .whereEqualTo("nombre", usuarioSeleccionado.nombreCompleto)
+                                .whereEqualTo("sexo", usuarioSeleccionado.sexo)
+                                .whereEqualTo("telefono", usuarioSeleccionado.telefonoCelular)
+                                .whereEqualTo("direccion", usuarioSeleccionado.direccionDomicilio)
+                            ref
+                                .get()
+                                .addOnSuccessListener { result ->
+                                    for (document in result){
+                                        FirebaseConnection.getFirestoreReference()
+                                            .collection("usuarios").document(document.id)
+                                            .delete()
+                                    }
+                                    onResume()
+                                }                        }
                         adapter?.remove(adapter!!.getItem(posicionItemSeleccionado));
                     }
                     setNegativeButton("No", null)
