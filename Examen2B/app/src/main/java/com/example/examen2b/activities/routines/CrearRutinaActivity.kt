@@ -1,6 +1,5 @@
 package com.example.examen2b.activities.routines
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,7 +9,6 @@ import com.example.examen2b.R
 import com.example.examen2b.entities.Usuario
 import com.example.examen2b.public.FirebaseConnection
 import com.example.examen2b.public.Settings
-import com.example.examen2b.public.Validator
 
 class CrearRutinaActivity : AppCompatActivity() {
 
@@ -22,15 +20,17 @@ class CrearRutinaActivity : AppCompatActivity() {
         setTitle("Crear una nueva rutina")
         val btnRegistrarRutina = findViewById<Button>(R.id.btn_registrar_rutina)
         btnRegistrarRutina.setOnClickListener {
+            crearRutina()
         }
+    }
 
-        fun crearRutina() {
+    fun crearRutina() {
             val tipoEjercicio = findViewById<EditText>(R.id.c_input_tipo_ejercicio)
             val series = findViewById<EditText>(R.id.c_input_series)
             val cantidad = findViewById<EditText>(R.id.c_input_cantidad)
             val dia = findViewById<EditText>(R.id.c_input_dia)
             val latitud = findViewById<EditText>(R.id.c_input_latitud)
-            val longitud = findViewById<EditText>(R.id.c_input_altitud)
+            val longitud = findViewById<EditText>(R.id.c_input_longitud)
 
             val usuario = intent.getParcelableExtra<Usuario>("usuario")!!
 
@@ -48,10 +48,10 @@ class CrearRutinaActivity : AppCompatActivity() {
                     val nuevaRutina = hashMapOf<String, Any>(
                         "tipoEjercicio" to tipoEjercicio.text.toString(),
                         "series" to series.text.toString().toInt(),
-                        "cantidad" to series.text.toString().toInt(),
-                        "dia" to series.text.toString(),
-                        "longitud" to series.text.toString(),
-                        "latitud" to series.text.toString()
+                        "cantidad" to cantidad.text.toString().toInt(),
+                        "dia" to dia.text.toString(),
+                        "longitud" to longitud.text.toString().toDouble(),
+                        "latitud" to latitud.text.toString().toDouble()
                     )
 
                     val refUser = FirebaseConnection.getFirestoreReference()
@@ -66,7 +66,7 @@ class CrearRutinaActivity : AppCompatActivity() {
                                 FirebaseConnection.getFirestoreReference()
                                     .collection("usuarios")
                                     .document(document.id)
-                                    .collection("rutina")
+                                    .collection("rutinas")
                                     .add(nuevaRutina)
                                     .addOnSuccessListener {
                                         Settings.clearInputs(
@@ -98,4 +98,4 @@ class CrearRutinaActivity : AppCompatActivity() {
             }
         }
     }
-}
+

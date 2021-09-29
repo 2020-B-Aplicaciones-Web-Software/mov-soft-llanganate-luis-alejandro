@@ -3,7 +3,6 @@ package com.example.examen2b.activities.routines
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -23,7 +22,7 @@ class ActualizarRutinaActivity : AppCompatActivity() {
         val series =  findViewById<EditText>(R.id.update_input_series)
         val cantidad =  findViewById<EditText>(R.id.update_input_cantidad)
         val dia =  findViewById<EditText>(R.id.update_input_dia)
-        val longitud = findViewById<EditText>(R.id.update_input_altitud)
+        val longitud = findViewById<EditText>(R.id.update_input_longitud)
         val latitud = findViewById<EditText>(R.id.update_input_latitud)
 
         val rutina = intent.getParcelableExtra<Rutina>("rutina")
@@ -70,8 +69,7 @@ class ActualizarRutinaActivity : AppCompatActivity() {
                                         .whereEqualTo("series", rutina.numeroDeSeries)
                                         .whereEqualTo("cantidad", rutina.cantidad)
                                         .whereEqualTo("dia", rutina.dia)
-                                        .whereEqualTo("longitud", rutina.longitud)
-                                        .whereEqualTo("latitud", rutina.latitud)
+
                                         .get()
                                         .addOnSuccessListener { resultRutina ->
                                             for(documentoRutina in resultRutina){
@@ -85,11 +83,13 @@ class ActualizarRutinaActivity : AppCompatActivity() {
                                                         "dia" to dia.text.toString(),
                                                         "longitud" to longitud.text.toString().toDouble(),
                                                         "latitud" to latitud.text.toString().toDouble()
-                                                    ))
+                                                    )).addOnSuccessListener {
+                                                        com.example.examen2b.public.Settings.showMessage(
+                                                            this, "Se ha actualizado correctamente esta rutina"
+                                                        )
+                                                    }
                                             }
-                                            com.example.examen2b.public.Settings.showMessage(
-                                                this, "Se ha actualizado correctamente esta rutina"
-                                            )
+
                                         }
                                 }
                             }

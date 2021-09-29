@@ -184,17 +184,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_altitud"
+                android:id="@+id/tv_longitud"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Altitud:"
+                android:text="Longitud:"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/primary"
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/update_input_altitud"
+                android:id="@+id/update_input_longitud"
                 android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

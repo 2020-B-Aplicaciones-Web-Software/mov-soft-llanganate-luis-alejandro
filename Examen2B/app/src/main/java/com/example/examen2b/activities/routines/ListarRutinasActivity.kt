@@ -44,7 +44,6 @@ class ListarRutinasActivity : AppCompatActivity() {
     }
 
     fun mostrarRutinas() {
-        arregloRutinas = arrayListOf()
         findViewById<TextView>(R.id.txv_show_nombre).setText("Usuario: ${usuario.nombreCompleto}")
         usuario = intent.getParcelableExtra<Usuario>("usuario")!!
 
@@ -58,6 +57,7 @@ class ListarRutinasActivity : AppCompatActivity() {
         refUsuario
             .get()
             .addOnSuccessListener { result ->
+
                 for(document in result){
                     FirebaseConnection.getFirestoreReference()
                         .collection("usuarios")
@@ -65,30 +65,34 @@ class ListarRutinasActivity : AppCompatActivity() {
                         .collection("rutinas")
                         .get()
                         .addOnSuccessListener { resultRutinas ->
+                            arregloRutinas = arrayListOf()
                             for(documentRutina in resultRutinas){
                                 arregloRutinas.add(
                                     Rutina(
-                                        "${document.get("tipoEjercicio")}",
-                                        "${document.get("series")}".toInt(),
-                                        "${document.get("cantidad")}".toInt(),
-                                        "${document.get("dia")}",
-                                        "${document.get("latitud")}".toDouble(),
-                                        "${document.get("longitud")}".toDouble()
+                                        "${documentRutina.get("tipoEjercicio")}",
+                                        "${documentRutina.get("series")}".toInt(),
+                                        "${documentRutina.get("cantidad")}".toInt(),
+                                        "${documentRutina.get("dia")}",
+                                        "${documentRutina.get("longitud")}".toDouble(),
+                                        "${documentRutina.get("latitud")}".toDouble(),
                                     )
                                 )
+                                Log.i("rutinas", "${arregloRutinas}")
+
                             }
+                            adapter =  ArrayAdapter(
+                                this,
+                                android.R.layout.simple_list_item_1, // Layout (Visual)
+                                arregloRutinas,
+                            )
+                            val listView = findViewById<ListView>(R.id.lv_lista_rutinas)
+                            listView.adapter = adapter
+                            registerForContextMenu(listView)
+
                         }
                 }
-            }
 
-        adapter =  ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1, // Layout (Visual)
-            arregloRutinas,
-        )
-        val listView = findViewById<ListView>(R.id.txv_lista_rutinas)
-        registerForContextMenu(listView)
-        listView.adapter = adapter
+            }
     }
 
     override fun onCreateContextMenu(
@@ -165,8 +169,6 @@ class ListarRutinasActivity : AppCompatActivity() {
                         .whereEqualTo("series", rutina.numeroDeSeries)
                         .whereEqualTo("cantidad", rutina.cantidad)
                         .whereEqualTo("dia", rutina.dia)
-                        .whereEqualTo("longitud", rutina.longitud)
-                        .whereEqualTo("latitud", rutina.latitud)
                         .get()
                         .addOnSuccessListener { resultRutina ->
                             for(documentoRutina in resultRutina){
