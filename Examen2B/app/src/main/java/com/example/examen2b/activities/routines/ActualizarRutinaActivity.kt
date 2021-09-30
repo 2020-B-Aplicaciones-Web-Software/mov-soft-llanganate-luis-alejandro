@@ -69,7 +69,6 @@ class ActualizarRutinaActivity : AppCompatActivity() {
                                         .whereEqualTo("series", rutina.numeroDeSeries)
                                         .whereEqualTo("cantidad", rutina.cantidad)
                                         .whereEqualTo("dia", rutina.dia)
-
                                         .get()
                                         .addOnSuccessListener { resultRutina ->
                                             for(documentoRutina in resultRutina){
