@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mi_actualizar_rutina"
+        android:title="Actualizar rutina" />
+    <item
+        android:id="@+id/mi_eliminar_rutina"
+        android:title="Eliminar rutina" />
+    <item
+        android:id="@+id/mi_ver_mapa"
+        android:title="Ver ubicación" />
+</menu>
